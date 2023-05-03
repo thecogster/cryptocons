@@ -1,2 +1,5 @@
+django-rest-framework==0.1.0 
 crispy_bootstrap4
 bootstrap4
+django-filter
+django-crum
