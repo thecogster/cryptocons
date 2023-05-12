@@ -1,5 +1,6 @@
-django-rest-framework==0.1.0 
+Django>=3.2,<3.3
 crispy_bootstrap4
 bootstrap4
 django-filter
 django-crum
+gunicorn>=20.1.0,<20.2

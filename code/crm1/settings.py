@@ -138,4 +138,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # AUTH_USER_MODEL = "accounts.CustomUser"  # new
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/craiclounge/profile/'
+STATIC_ROOT = '/static'

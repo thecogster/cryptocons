@@ -50,6 +50,11 @@ def home(request):
 
 	return render(request, 'accounts/home.html', context=context)
 
+def craicLounge(request):
+
+	
+	return render(request, 'accounts/craic_lounge.html')
+
 @login_required(login_url='login_url')
 def loanTest(request):
 	## Takes list of posts 
@@ -115,16 +120,21 @@ def register(request):
 # 		context = {'form':form}
 # 		return render(request, 'accounts/register.html', context)
 
-
+@login_required(login_url='login_url')
 def logoutUser(request):
 	logout(request)
 	return redirect('login')
 
 
 
-## Using login_required and passing the login url we can verify if the user is logged in
+
+
+
+
+
+
 @login_required(login_url='login_url')
-def home(request):
+def profile(request):
 	# orders = Order.objects.all()
 	# customers = Customer.objects.all()
 
@@ -138,7 +148,7 @@ def home(request):
 	# 'total_orders':total_orders,'delivered':delivered,
 	# 'pending':pending }
 
-	return render(request, 'accounts/home.html')
+	return render(request, 'accounts/profile.html')
 	# return JsonResponse(ticker_details_json, safe=False)
 
 # @login_required(login_url='login')
