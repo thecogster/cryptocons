@@ -9,10 +9,13 @@
 	<body>
 		<h1>Craic Lounge image page</h1>
 		<p>Welcome to the craic lounge</p>
+		<a class="ml-2" href="{% url 'login_url' %}"> Login </a>
+		<a class="ml-2" href="{% url 'leaderboard' %}"> Leaderboard </a>
+
+
 		<img src="{% static 'cryptocons.jpeg'%}"/>
 
 		
-		<a class="ml-2" href="{% url 'login_url' %}"> Log In again </a>
 	</body>
 {%endblock content%}
 

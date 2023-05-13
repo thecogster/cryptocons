@@ -26,10 +26,14 @@ urlpatterns = [
     ## when enter home defaults to home page
     path('home', include('businesses.urls'), name='homepage'),
     path('craiclounge/', include('accounts.urls'), name='craic_lounge'),
+    
+    path('craiclounge/leaderboard/', include('accounts.urls'), name='leaderboard'),
+
     path('Login/', auth_views.LoginView.as_view(template_name= 'accounts/login.html'), name='login_url'),
     path('Logout/', auth_views.LogoutView.as_view(template_name='accounts/logout.html'), name='logout_url'),
     path('register/', include('accounts.urls'), name='register_url'),
     path('profile/', include('accounts.urls'), name='profile'),
+
 
 
     # path('profile/', include('accounts.urls'), name='profile'),

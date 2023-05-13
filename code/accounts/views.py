@@ -128,28 +128,35 @@ def logoutUser(request):
 
 
 
+# @login_required(login_url='login_url')
+def leaderboard(request):
+    # Retrieve all users and sort by date joined
+    all_users = User.objects.order_by('date_joined')
 
+	## Its a dictionary passed as users to html 
+    return render(request, 'accounts/leaderboard.html', {'users': all_users})
 
 
 
 
 @login_required(login_url='login_url')
 def profile(request):
-	# orders = Order.objects.all()
-	# customers = Customer.objects.all()
+	from django.shortcuts import render
+	from django.contrib.auth.decorators import login_required
 
-	# total_customers = customers.count()
+    # Retrieve the current user's profile information
+	current_user = request.user
+	profile_info = {
+	'username': current_user.username,
+	'email': current_user.email,
+	'date_joined': current_user.date_joined,
+	'last_login': current_user.last_login,
+	}
 
-	# total_orders = orders.count()
-	# delivered = orders.filter(status='Delivered').count()
-	# pending = orders.filter(status='Pending').count()
-
-	# context = {'orders':orders, 'customers':customers,
-	# 'total_orders':total_orders,'delivered':delivered,
-	# 'pending':pending }
-
-	return render(request, 'accounts/profile.html')
+	return render(request, 'accounts/profile.html', {'profile_info': profile_info})
 	# return JsonResponse(ticker_details_json, safe=False)
+
+
 
 # @login_required(login_url='login')
 # def products(request):

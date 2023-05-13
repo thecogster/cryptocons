@@ -8,7 +8,11 @@ urlpatterns = [
 	path('home/', views.home, name="home"),
     # path('loanapp/', views.loanTest, name="loan_url"),
     path('', views.craicLounge, name="craiclounge"),
+    path('leaderboard/', views.leaderboard, name='leaderboard'),
+
     path('profile/', views.profile, name="profile"),
+
+    # path('profile/leaderboard/', views.leaderboard, name='leaderboard'),
     # path('logout', views.logoutUser, name="logout_url"),
 
     # # path('dashboard/', views.crypto, name="dashboard_url"),

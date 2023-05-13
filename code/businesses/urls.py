@@ -3,4 +3,5 @@ from django.urls import path, include
 
 
 urlpatterns = [
-	path('', views.homepage, name="homepage"),]
+	path('', views.homepage, name="homepage"),
+]
