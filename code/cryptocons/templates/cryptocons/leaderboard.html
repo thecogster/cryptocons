@@ -1,0 +1,28 @@
+{% extends 'cryptocons/base.html'%}
+{% load crispy_forms_tags%}
+
+{%block content%}
+<h1>Leaderboard</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Date Joined</th>
+            <th>Amount of cards</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.date_joined }}</td>
+                <td>{{ user.username|length }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{%endblock%}
