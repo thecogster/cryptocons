@@ -2,21 +2,19 @@
 {%load static%}
 {%load crispy_forms_tags%}
 {%block content%}
-	<head>
-		<title> Craic Lounge</title>
+<head>
+  <meta charset="UTF-8">
+  <title>Craic Lounge</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="background-image"></div>
+	<div class="links-container">
+		<a href="{% url 'login_url' %}">Sign In</a>
+		<a href="{% url 'leaderboard' %}">Leaderboard</a>
+  	</div>
+</body>
 
-	</head>
-	<body>
-		<h1>Craic Lounge image page</h1>
-		<p>Welcome to the craic lounge</p>
-		<a class="ml-2" href="{% url 'login_url' %}"> Login </a>
-		<a class="ml-2" href="{% url 'leaderboard' %}"> Leaderboard </a>
-
-
-		<img src="{% static 'cryptocons.jpeg'%}"/>
-
-		
-	</body>
 {%endblock content%}
 
 
