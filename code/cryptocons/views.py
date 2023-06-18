@@ -26,66 +26,35 @@ from .models import *
 
 post = [{'loan_title':'Youre Fucked','name': 'roger'},{'loan_title':'Youre Not Fucked','name': 'Mary'}]
 
-
-
-
-# def home(request):
-# 	## Takes list of posts 
-# 	## passes the key posts as the access to the lsit of dicts
-
-# 	context = {'businesses': Business.objects.all()}
-
-# 	## render passes request, the directory to the appname/template.html as django auto searches for templates, passes context as the 
-# 	## dictionary of posts
-
-# 	return render(request, 'accounts/home.html', context=context)
 def home(request):
 
     template = 'cryptocons/homepage.html'
     return render(request, template)
 
+
+
+def login_view(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        user = authenticate(request, email=email, password=password)
+	
+        if user is not None:
+            login(request, user)
+            # Redirect the user to the desired page after successful login
+            return redirect('homepage_url')
+        else:
+            # Authentication failed, display an error message
+            messages.error(request, 'Invalid email or password')
+
+    return render(request, 'cryptocons/login.html')
+
+@login_required(login_url='login_url')
 def craicLounge(request):
 
 	
 	return render(request, 'cryptocons/craic_lounge.html')
-
-@login_required(login_url='login_url')
-def loanTest(request):
-	## Takes list of posts 
-	## passes the key posts as the access to the lsit of dicts
-	# if request.method =='POST' and 'form1' in request.POST:
-
-	if request.method == 'POST' and 'loanappbtn' in request.POST:
-
-		## If User is posting data using the button in our html named loanappbtn then we submit post to our form object
-
-		businessform = BusinessApplication(request.POST)
-		loanform = LoanApplication(request.POST)
-
-
-		if businessform.is_valid() and loanform.is_valid():			# current_user = request.user
-			
-			# businessform.author = current_user.username
-			businessform.save()
-			# new_business.author = User.id
-			loan_form = loanform.save(commit=False)
-			# loan_form.business_id = request.new_business.id
-			loanform.save()
-
-			return redirect('home')
-		else:
-			messages.ERROR(request, f'Ensure loan is between 10000-100000 ')
-			return redirect('loan_url')
-
-## We are loading the forms for users that have not completed them 
-	else:
-		businessform = BusinessApplication()
-		loanform = LoanApplication()
-		template = 'accounts/businessregister.html'
-		context = {'businessform': businessform, 'loanform':loanform}
-
-	return render(request, template, context)
-	
 
 
 def register(request):
@@ -117,7 +86,7 @@ def register(request):
 @login_required(login_url='login_url')
 def logoutUser(request):
 	logout(request)
-	return redirect('login')
+	return redirect('/')
 
 
 

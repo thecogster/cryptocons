@@ -9,51 +9,64 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
     /* Custom styles for the navbar */
+    .navbar {
+      background-color: rgba(55, 63, 56, 0); /* Set the background color with an alpha value for opacity */
+    }
+  
     .navbar-brand img {
-      height: 60px; /* Adjust the height of the logo as needed */
+      height: 80px; /* Adjust the height of the logo as needed */
       width: auto; /* Maintain aspect ratio of the logo */
       margin-right: 10px; /* Add some space between the logo and buttons */
     }
-
+  
     .navbar .btn {
       transition: background-color 0.3s ease-in-out; /* Hover effect transition duration */
+      color: rgba(255, 255, 255, 0); /* Set the text color with an alpha value of 0 (fully transparent) */
+      background-color: rgba(0, 0, 0, 0); /* Set the background color with an alpha value of 0 (fully transparent) */
+      font-family: 'Open Sans Condensed';
     }
-
+  
     .navbar .btn:hover {
-      background-color: #f8f9fa; /* Change the background color on hover */
+      background-color: #14ae14; /* Change the background color on hover */
     }
-
+  
     .navbar .navbar-nav {
       margin-left: auto; /* Push the navbar-nav to the right */
     }
-
+  
     .navbar .navbar-nav .nav-item {
       margin-right: 10px; /* Add some space between the buttons */
     }
-
+  
+    .navbar .navbar-nav .nav-link {
+      color: white; /* Set the text color of the links to white */
+      font-size: 25px;
+    }
+  
     /* Additional styles for button alignment */
     @media (min-width: 992px) {
       .navbar .navbar-nav.align-buttons {
         margin-left: 0;
       }
-
+  
       .navbar .navbar-nav.align-buttons .nav-item {
         margin-right: 0;
         margin-left: 10px;
       }
     }
   </style>
+  
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-      <img src="{% static '../static/images/cryptochauns_logo.jpeg' %}" alt="Logo">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="{% url 'homepage_url' %}">
+      <img src="{% static '../static/images/lep.png' %}" alt="Logo">
     </a>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto align-buttons">
         <li class="nav-item">
-          <a class="nav-link btn" href="#">Home</a>
+          <a class="nav-link btn" href="{% url 'homepage_url' %}">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link btn" href="#">Button 2</a>
@@ -65,7 +78,7 @@
       {% if user.is_authenticated %}
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link btn" href="#">Logout</a>
+            <a class="nav-link btn" href="{% url 'logout_url' %}">Logout</a>
           </li>
           <li class="nav-item">
             <a class="nav-link btn" href="#">My Account</a>
@@ -79,9 +92,4 @@
   {% endblock %}
 
   <!-- Include the necessary Bootstrap and jQuery scripts -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
-
-</html>
+  <script src="https://

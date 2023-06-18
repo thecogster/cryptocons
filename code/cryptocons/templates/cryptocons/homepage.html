@@ -1,25 +1,124 @@
 {% extends 'cryptocons/base.html' %}
 
+{% block title %}My Page{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <h2 class="text-center">Login</h2>
-      <form method="POST" action="{% url 'login_url' %}">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary">Login</button>
-          <a href="{% url 'register_url' %}" class="btn btn-link">Register</a>
-        </div>
-      </form>
+<style>
+  .container-wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .content-container {
+    background-color: rgba(0, 0, 0, 0.6); /* Set the background color with 0.5 opacity */
+    padding: 20px;
+    text-align: center;
+    max-width: 50%; /* Limit the width of the container to 50% of the page */
+    margin: 0 auto; /* Center the container horizontally */
+    margin-bottom: 70px;
+  }
+
+  .title {
+    margin-bottom: 20px;
+    color: white; /* Set the title text color to white */
+  }
+
+  .text {
+    color: white; /* Set the paragraph text color to white */
+  }
+
+  .box-container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    height: 100%;
+  }
+
+  .box {
+    width: 400px;
+    height: 400px;
+    margin-right: 50px; /* Increase the spacing between boxes */
+    margin-left: 50px;
+    border: 5px solid black;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .box a {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    text-decoration: none;
+  }
+
+  .box a:hover {
+    color: green; /* Set the link text color to green on hover */
+  }
+
+  body {
+    background-image: url('../static/images/cryptochauns_logo.jpeg');
+    background-repeat: repeat;
+  }
+
+  .b1 { 
+    background-color: green;
+    color: white;
+  }
+
+  .b2 {
+    background-color: white;
+    color: green;
+  }
+
+  .b3 {
+    background-color: orange;
+    color: White;
+  }
+
+  .b1 a{
+    color: white;
+  }
+
+  .b2 a{
+    color: green;
+  }
+
+  .b3 a{
+    color: white;
+  }
+</style>
+
+<div class="container-wrapper">
+  <div class="content-container">
+    <h1 class="title">Welcome to the Cryptochauns Landing Page</h1>
+    <p class="text">This is where the main text will go. This is where the main text will go. This is where the main text will go. This is where the main text will go.
+      This is where the main text will go. This is where the main text will go. This is where the main text will go. This is where the main text will go.
+      This is where the main text will go. This is where the main text will go. This is where the main text will go. This is where the main text will go.
+      This is where the main text will go. This is where the main text will go. This is where the main text will go. This is where the main text will go.
+    </p>
+  </div>
+  <div class="box-container">
+    <div class="box b1">
+      <a href="https://candy-shop-storefront-kevinsull98.vercel.app/">
+        <h2>NFT Marketplace</h2>
+      </a>
+    </div>
+    <div class="box b2">
+      <a href="{% url 'craic_lounge' %}">
+        <h2>Craic Lounge</h2>
+      </a>
+    </div>
+    <div class="box b3">
+      <a href="{% url 'homepage_url' %}">
+        <h2>Cannabis Collectables</h2>
+      </a>
     </div>
   </div>
 </div>
