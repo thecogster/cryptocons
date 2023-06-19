@@ -28,7 +28,7 @@ urlpatterns = [
 
     path('', views.home, name='homepage_url'),
     path('register/', views.register, name='register_url'),
-    path('login/', views.login_view, name='login_url'),
+    path('login/', auth_views.LoginView.as_view(template_name='cryptocons/login.html'), name='login_url'),
     path('Logout/', auth_views.LogoutView.as_view(template_name='cryptocons/logout.html'), name='logout_url'),
     path('craiclounge/', views.craicLounge,name='craic_lounge'),
     path('leaderboard/', views.leaderboard, name='leaderboard'),

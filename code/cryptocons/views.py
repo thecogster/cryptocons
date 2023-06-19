@@ -33,22 +33,22 @@ def home(request):
 
 
 
-def login_view(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+# def login_view(request):
+#     if request.method == 'POST':
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
 
-        user = authenticate(request, email=email, password=password)
+#         user = authenticate(request, email=email, password=password)
 	
-        if user is not None:
-            login(request, user)
-            # Redirect the user to the desired page after successful login
-            return redirect('homepage_url')
-        else:
-            # Authentication failed, display an error message
-            messages.error(request, 'Invalid email or password')
+#         if user is not None:
+#             login(request, user)
+#             # Redirect the user to the desired page after successful login
+#             return redirect('homepage_url')
+#         else:
+#             # Authentication failed, display an error message
+#             messages.error(request, 'Invalid email or password')
 
-    return render(request, 'cryptocons/login.html')
+#    return render(request, 'cryptocons/login.html')
 
 @login_required(login_url='login_url')
 def craicLounge(request):
