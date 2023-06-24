@@ -103,18 +103,22 @@ def qr_generator(request):
 
     if request.method == 'POST':
         form = CardsForm(request.POST)
+        quantity = request.POST.get('quantity')
+        for i in range(1, int(quantity)):
+            form.save()
+        
         # Get the form inputs from the POST request
         leprechaun_number = request.POST.get('leprechaun_number')
         tier_id = request.POST.get('tier_id')
         position = request.POST.get('position')
-        quantity = form.cleaned_data['quantity']
+        quantity = request.POST.get('quantity')
 
         save_path = "cryptocons/static/images/qr"
         highest_unique_id = None
 
         for filename in os.listdir(save_path):
             if len(os.listdir(save_path)) == 0:
-                  highest_unique_id = 0
+                highest_unique_id = 0
             elif os.path.isfile(os.path.join(save_path, filename)):
                 numbers = [int(s) for s in filename.split() if s.isdigit()]
 
@@ -122,9 +126,9 @@ def qr_generator(request):
                     current_number = max(numbers)
                     if highest_unique_id is None or current_number > highest_unique_id:
                         highest_unique_id = current_number
-                        
-        highest_unique_id = 10	
-        print(quantity)
+
+        highest_unique_id = 10
+
         for i in range(highest_unique_id+1, highest_unique_id+int(quantity)):
             url = "http://127.0.0.1:8000/qr_scan/"  # Replace with your actual API endpoint
 
@@ -142,9 +146,10 @@ def qr_generator(request):
             # Save the QR code image with the unique ID as the filename
             qr_image.save(f"{save_path}/{i}.png")
 
-        return render(request, template, {'form' : form})
+        return render(request, template, {'form': form})
 
-    return render(request, template, {'form' : form})
+    return render(request, template, {'form': form})
+
 
 
 
