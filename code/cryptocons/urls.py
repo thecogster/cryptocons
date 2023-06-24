@@ -34,7 +34,7 @@ urlpatterns = [
     path('leaderboard/', views.leaderboard, name='leaderboard'),
     path('craiclounge/profile/', views.profile, name='profile'),
     path('qr_generator/', views.qr_generator, name='qr_generator'),
-    re_path('qr_scan', views.qr_scan, name='qr_scan'),
+    #re_path(r'^/qr_scan/(?P<path>.*)$', views.qr_scan_redirect, name='qr_scan_redirect'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
