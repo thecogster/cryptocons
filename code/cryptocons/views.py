@@ -101,6 +101,17 @@ def logoutUser(request):
 	return redirect('/')
 
 
+def qr_generator(request):
+    template = 'cryptocons/qr_generator.html'
+    
+
+    return render(request, template)
+
+def qr_scan(request):
+    template = 'cryptocons/qr_scan.html'
+    
+	
+    return render(request, template)
 
 
 # @login_required(login_url='login_url')

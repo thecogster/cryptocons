@@ -1,0 +1,26 @@
+{% extends 'cryptocons/base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Generate New QR Code</h1>
+    <form>
+      <div class="form-group">
+        <label for="leprechaun-id">Leprechaun ID</label>
+        <input type="text" class="form-control" id="leprechaun-id" placeholder="Enter Leprechaun ID">
+      </div>
+      <div class="form-group">
+        <label for="tier">Tier</label>
+        <input type="text" class="form-control" id="tier" placeholder="Enter Tier">
+      </div>
+      <div class="form-group">
+        <label for="position">Position</label>
+        <input type="text" class="form-control" id="position" placeholder="Enter Position">
+      </div>
+      <div class="form-group">
+        <label for="position">Enter Quantity</label>
+        <input type="text" class="form-control" id="position" placeholder="Enter Quantity">
+      </div>
+      <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+  </div>
+{% endblock %}

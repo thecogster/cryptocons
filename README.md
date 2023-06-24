@@ -11,12 +11,9 @@ https://docs.docker.com/desktop/install/mac-install/
 ///// ATTENTION MCGINT 
 //// 
 
-
-
-
 // run the manage.py in the root folder 
 
-// Theres another readme in the folder with the main methods 
+// Theres another readme in the folder with the main methods
 
 
 

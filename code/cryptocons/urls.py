@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.contrib.auth import views as user_views
 from cryptocons import  views
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import re_path
 
 
 urlpatterns = [
@@ -28,12 +28,13 @@ urlpatterns = [
 
     path('', views.home, name='homepage_url'),
     path('register/', views.register, name='register_url'),
-    path('Login/', auth_views.LoginView.as_view(template_name='cryptocons/login.html'), name='login_url'),
+    path('login/', auth_views.LoginView.as_view(template_name='cryptocons/login.html'), name='login_url'),
     path('Logout/', auth_views.LogoutView.as_view(template_name='cryptocons/logout.html'), name='logout_url'),
     path('craiclounge/', views.craicLounge,name='craic_lounge'),
     path('leaderboard/', views.leaderboard, name='leaderboard'),
-
     path('craiclounge/profile/', views.profile, name='profile'),
+    path('qr_generator/', views.qr_generator, name='qr_generator'),
+    re_path('qr_scan', views.qr_scan, name='qr_scan'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
