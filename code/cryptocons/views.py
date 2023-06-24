@@ -25,6 +25,7 @@ import os
 import qrcode
 
 from .models import Cards
+from .forms import CardsForm
 
 # import requests
 
@@ -101,11 +102,12 @@ def qr_generator(request):
     template = 'cryptocons/qr_generator.html'
 
     if request.method == 'POST':
+        form = CardsForm(request.POST)
         # Get the form inputs from the POST request
         leprechaun_number = request.POST.get('leprechaun_number')
         tier_id = request.POST.get('tier_id')
         position = request.POST.get('position')
-        quantity = request.POST.get('quantity')
+        quantity = form.cleaned_data['quantity']
 
         save_path = "cryptocons/static/images/qr"
         highest_unique_id = None
@@ -140,9 +142,9 @@ def qr_generator(request):
             # Save the QR code image with the unique ID as the filename
             qr_image.save(f"{save_path}/{i}.png")
 
-        return render(request, template)
+        return render(request, template, {'form' : form})
 
-    return render(request, template)
+    return render(request, template, {'form' : form})
 
 
 

@@ -13,6 +13,10 @@ class CardsForm(forms.ModelForm):
     position = forms.CharField( widget=TextInput(attrs={'type':'number'}))
     quantity = forms.CharField( widget=TextInput(attrs={'type':'number'}))
 
+    class Meta:
+        model = Cards 
+        fields = ['leprechaun_number', 'tier', 'position']
+
 
 class UserRegisterForm(UserCreationForm):
 	email  = forms.EmailField()
