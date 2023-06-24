@@ -5,16 +5,13 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from .models import Cards
 from django import forms
-
-
-from django import forms
-from .models import Cards
+from django.forms import ModelForm, CharField, TextInput
 
 class CardsForm(forms.ModelForm):
-    class Meta:
-        model = Cards
-        fields = ['id', 'card_name', 'qr_code', 'image_location', 'owner']
-
+    leprechaun_number = forms.CharField( widget=TextInput(attrs={'type':'number'}))
+    tier = forms.CharField( widget=TextInput(attrs={'type':'number'}))
+    position = forms.CharField( widget=TextInput(attrs={'type':'number'}))
+    quantity = forms.CharField( widget=TextInput(attrs={'type':'number'}))
 
 
 class UserRegisterForm(UserCreationForm):

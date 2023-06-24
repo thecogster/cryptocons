@@ -4,8 +4,8 @@ from django.conf import settings
 
 class Cards(models.Model):
     id = models.AutoField(primary_key=True)
-    card_name = models.CharField(max_length=100)
-    qr_code = models.CharField(max_length=100)
-    image_location = models.ImageField(upload_to='cards/')
+    leprechaun_number = models.CharField(max_length=100)
+    tier = models.CharField(max_length=100, default=None)
+    position = models.CharField(max_length=100)
     created_date = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,default=1)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,default=None)

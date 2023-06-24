@@ -20,6 +20,11 @@ import hashlib
 import hmac
 import base64
 import json
+import qrcode
+import os
+import qrcode
+
+from .models import Cards
 
 # import requests
 
@@ -91,11 +96,55 @@ def logoutUser(request):
 	return redirect('/')
 
 
+
 def qr_generator(request):
     template = 'cryptocons/qr_generator.html'
-    
+
+    if request.method == 'POST':
+        # Get the form inputs from the POST request
+        leprechaun_number = request.POST.get('leprechaun_number')
+        tier_id = request.POST.get('tier_id')
+        position = request.POST.get('position')
+        quantity = request.POST.get('quantity')
+
+        save_path = "cryptocons/static/images/qr"
+        highest_unique_id = None
+
+        for filename in os.listdir(save_path):
+            if len(os.listdir(save_path)) == 0:
+                  highest_unique_id = 0
+            elif os.path.isfile(os.path.join(save_path, filename)):
+                numbers = [int(s) for s in filename.split() if s.isdigit()]
+
+                if numbers:
+                    current_number = max(numbers)
+                    if highest_unique_id is None or current_number > highest_unique_id:
+                        highest_unique_id = current_number
+                        
+        highest_unique_id = 10	
+        print(quantity)
+        for i in range(highest_unique_id+1, highest_unique_id+int(quantity)):
+            url = "http://127.0.0.1:8000/qr_scan/"  # Replace with your actual API endpoint
+
+            # Combine the URL and unique ID
+            data = url + str(leprechaun_number) + "_" + str(tier_id) + "_" + str(position) + "_" + str(i)
+
+            # Generate the QR code
+            qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+            qr.add_data(data)
+            qr.make(fit=True)
+
+            # Create an image from the QR code
+            qr_image = qr.make_image(fill_color="black", back_color="white")
+
+            # Save the QR code image with the unique ID as the filename
+            qr_image.save(f"{save_path}/{i}.png")
+
+        return render(request, template)
 
     return render(request, template)
+
+
 
 
 #def qr_scan(request):
@@ -113,8 +162,6 @@ def leaderboard(request):
 
 	## Its a dictionary passed as users to html 
     return render(request, 'cryptocons/leaderboard.html', {'users': all_users})
-
-
 
 
 @login_required(login_url='login_url')

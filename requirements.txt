@@ -6,3 +6,4 @@ django-crum
 gunicorn>=20.1.0,<20.2
 Pillow==9.5.0
 qrcode[pil]
+requests
