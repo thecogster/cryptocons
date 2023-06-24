@@ -102,9 +102,10 @@ def qr_generator(request):
     template = 'cryptocons/qr_generator.html'
 
     if request.method == 'POST':
-        form = CardsForm(request.POST)
+
         quantity = request.POST.get('quantity')
         for i in range(1, int(quantity)):
+            form = CardsForm(request.POST)
             form.save()
         
         # Get the form inputs from the POST request
