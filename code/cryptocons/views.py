@@ -33,17 +33,7 @@ def home(request):
     template = 'cryptocons/homepage.html'
     return render(request, template)
 
-from .forms import CardsForm
 
-def your_view(request):
-    if request.method == 'POST':
-        form = CardsForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('your_redirect_url')  # Replace this with your success URL
-    else:
-        form = CardsForm()
-    return render(request, 'your_template.html', {'form': form})
 
 # def login_view(request):
 #     if request.method == 'POST':
@@ -101,17 +91,6 @@ def logoutUser(request):
 	return redirect('/')
 
 
-def qr_generator(request):
-    template = 'cryptocons/qr_generator.html'
-    
-
-    return render(request, template)
-
-def qr_scan(request):
-    template = 'cryptocons/qr_scan.html'
-    
-	
-    return render(request, template)
 
 
 # @login_required(login_url='login_url')
