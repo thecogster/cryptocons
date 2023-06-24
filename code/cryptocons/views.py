@@ -98,17 +98,12 @@ def qr_generator(request):
     return render(request, template)
 
 
-def qr_scan(request):
-    template = 'cryptocons/qr_scan.html'
+#def qr_scan(request):
+ #   template = 'cryptocons/qr_scan.html'
     
 	
-    return render(request, template)
+  #  return render(request, template)
 
-def qr_scan(request):
-    template = 'cryptocons/qr_scan.html'
-    
-	
-    return render(request, template)
 
 
 # @login_required(login_url='login_url')
