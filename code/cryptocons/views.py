@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegisterForm
+from .forms import CardsForm
+
 
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
@@ -31,7 +33,17 @@ def home(request):
     template = 'cryptocons/homepage.html'
     return render(request, template)
 
+from .forms import CardsForm
 
+def your_view(request):
+    if request.method == 'POST':
+        form = CardsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('your_redirect_url')  # Replace this with your success URL
+    else:
+        form = CardsForm()
+    return render(request, 'your_template.html', {'form': form})
 
 # def login_view(request):
 #     if request.method == 'POST':

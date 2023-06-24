@@ -3,19 +3,20 @@ from pyexpat import model
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Cards
 from django import forms
 
 
-# from .models import Order
+from django import forms
+from .models import Cards
+
+class CardsForm(forms.ModelForm):
+    class Meta:
+        model = Cards
+        fields = ['id', 'card_name', 'qr_code', 'image_location', 'owner']
 
 
-# class OrderForm(ModelForm):
-# 	class Meta:
-# 		model = Order
-# 		fields = '__all__'
 
-
-## inherit from the UserCreationForm
 class UserRegisterForm(UserCreationForm):
 	email  = forms.EmailField()
 	full_name = forms.CharField(max_length=100)
@@ -29,6 +30,7 @@ class UserChangeFormCustom(UserChangeForm):
 	class Meta:
 		model = User 
 		fields = ['username', 'email']
+
 
 
 
