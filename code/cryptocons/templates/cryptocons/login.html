@@ -1,20 +1,20 @@
-{%extends "cryptocons/base.html"%}
+{% extends "cryptocons/base.html" %}
 
-{% load crispy_forms_tags%}
-{%load static%}
+{% load crispy_forms_tags %}
+{% load static %}
 
-{%block content%}
+{% block content %}
 <style>
     body {
         background-image: url('../static/images/cryptochauns_logo.jpeg');
         background-repeat: repeat;
     }
-    
+
     .bg-rich-brown {
         background-color: white;
         border-color: black;
     }
-    
+
     .border-thick {
         border-width: 5px;
     }
@@ -28,8 +28,8 @@
     }
 
     .btn-login:hover {
-      background-color: green; /* Change the background color on hover */
-      border-color: black;
+        background-color: green; /* Change the background color on hover */
+        border-color: black;
     }
 
     .btn-link {
@@ -37,35 +37,51 @@
     }
 
     .btn-link:hover {
-        color:green;
+        color: green;
     }
 
     .divo:after {
-      opacity: 0.5;
+        opacity: 0.5;
+    }
+
+    /* Custom styles for form container */
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Center the form vertically */
+        height: 100vh; /* Set the height of the container to full viewport height */
+        margin-top: -200px; /* Adjust the negative margin-top value as needed */
+    }
+    
+
+    /* Custom styles for form fields */
+    .form-control {
+        width: 600px; /* Adjust the width as needed *//* Add a maximum width to prevent the form from becoming too wide */
+    }
+    
+
+    /* Custom styles for form text */
+    label, small, legend {
+        color: white;
     }
 </style>
 
-	<div class = "content-section">
-		<form method="POST">
-
-			{% csrf_token%}
-			<fieldset class="form-group">
-				<legend class = "border-bottom mb-4">Log-In</legend>
-					{{ form|crispy }} 
-			</fieldset>
-			<div class = "form-group">
-				<button class="btn btn-outline-info" type = "submit"> Login </button>
-
-			<div class = "border-top top-3">
-				<small class = "text-muted">
-					Need an account ? <a class="ml-2"  href="{% url 'register_url'%}"> Sign Up</a>
-				</small>
-			</div>
-
-
-
-			</div>
-
-		</form>
-	</div>
-{%endblock%}
+<div class="content-section">
+    <div class="form-container">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Login</button>
+            </div>
+            <div class="top-3">
+                <small class="text-muted">
+                    Need an account? <a class="ml-2" href="{% url 'register_url' %}">Sign Up</a>
+                </small>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

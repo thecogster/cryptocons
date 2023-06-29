@@ -142,6 +142,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # AUTH_USER_MODEL = "accounts.CustomUser"  # new
 
 LOGIN_REDIRECT_URL = '/craiclounge/profile/'
+LOGOUT_REDIRECT_URL = '/'
 STATIC_ROOT = '/static'
 
 ## BASE_DIR is file with manage.py

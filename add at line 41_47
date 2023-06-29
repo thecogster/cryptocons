@@ -1,3 +1,0 @@
-                    <a class="nav-item nav-link" href="{% url 'craic_lounge' %}">CrackLounge</a>
-
-                    <a class="nav-item nav-link" href="{% url 'register_url'%}">Register</a>

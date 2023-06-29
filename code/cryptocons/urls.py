@@ -29,12 +29,12 @@ urlpatterns = [
     path('', views.home, name='homepage_url'),
     path('register/', views.register, name='register_url'),
     path('login/', auth_views.LoginView.as_view(template_name='cryptocons/login.html'), name='login_url'),
-    path('Logout/', auth_views.LogoutView.as_view(template_name='cryptocons/logout.html'), name='logout_url'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='cryptocons/logout.html'), name='logout_url'),
     path('craiclounge/', views.craicLounge,name='craic_lounge'),
     path('leaderboard/', views.leaderboard, name='leaderboard'),
     path('craiclounge/profile/', views.profile, name='profile'),
     path('qr_generator/', views.qr_generator, name='qr_generator'),
-    #re_path(r'^/qr_scan/(?P<path>.*)$', views.qr_scan_redirect, name='qr_scan_redirect'),
+    re_path(r'qr_scan(?P<api_package>.*)$', views.qr_scan, name='qr_scan_url'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

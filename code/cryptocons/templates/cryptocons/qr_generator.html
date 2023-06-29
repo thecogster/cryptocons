@@ -1,28 +1,45 @@
 {% extends 'cryptocons/base.html' %}
-{% load crispy_forms_tags%}
-{%load static%}
+{% load crispy_forms_tags %}
+{% load static %}
+
 {% block content %}
-  <div class="container">
-    <h1>Generate New QR Code</h1>
-    <form method="POST" >
+<style>
+    body {
+        background-image: url('../static/images/cryptochauns_logo.jpeg');
+        background-repeat: repeat;
+    }
+
+    .label-text {
+        color: white;
+    }
+
+    .wt {
+        color: white;
+    }
+</style>
+
+<div class="container">
+    <h1 class="wt">Generate New QR Code</h1>
+    <form method="POST">
         {% csrf_token %}
-      <div class="form-group">
-        <label for="leprechaun_number">Leprechaun ID</label>
-        <input type="text" class="form-control" name="leprechaun_number" placeholder="Enter Leprechaun ID">
-      </div>
-      <div class="form-group">
-        <label for="tier">Tier</label>
-        <input type="text" class="form-control" name="tier" placeholder="Enter Tier">
-      </div>
-      <div class="form-group">
-        <label for="position">Position</label>
-        <input type="text" class="form-control" name="position" placeholder="Enter Position">
-      </div>
-      <div class="form-group">
-        <label for="quantity">Enter Quantity</label>
-        <input type="text" class="form-control" name="quantity" placeholder="Enter Quantity">
-      </div>
-      <button type="submit" class="btn btn-primary">Create</button>
+        <div class="form-group">
+            <label for="leprechaun_number" class="label-text">Leprechaun ID</label>
+            <input type="text" class="form-control" name="leprechaun_number" placeholder="Enter Leprechaun ID">
+        </div>
+        <div class="form-group">
+            <label for="tier" class="label-text">Tier</label>
+            <input type="text" class="form-control" name="tier" placeholder="Enter Tier">
+        </div>
+        <div class="form-group">
+            <label for="position" class="label-text">Position</label>
+            <input type="text" class="form-control" name="position" placeholder="Enter Position">
+        </div>
+        <div class="form-group">
+            <label for="quantity" class="label-text">Enter Quantity</label>
+            <input type="text" class="form-control" name="quantity" placeholder="Enter Quantity">
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
     </form>
-  </div>
+</div>
+
 {% endblock %}

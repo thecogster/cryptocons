@@ -2,13 +2,18 @@
 {%load static%}
 {%load crispy_forms_tags%}
 {%block content%}
+<style>
+    body {
+      background-image: url('../static/images/craiclounge.jpeg');
+    }
+</style>
 <head>
   <meta charset="UTF-8">
   <title>Craic Lounge</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
-  <div class="background-image"></div>
+
 	<div class="links-container">
 		<a href="{% url 'login_url' %}">Sign In</a>
 		<a href="{% url 'leaderboard' %}">Leaderboard</a>
