@@ -25,6 +25,11 @@ def craicLounge(request):
 
 	return render(request, 'cryptocons/craic_lounge.html')
 
+@login_required(login_url='login_url')
+def collectables(request):
+
+	return render(request, 'cryptocons/collectables.html')
+
 
 def register(request):
 

@@ -34,6 +34,7 @@ urlpatterns = [
     path('leaderboard/', views.leaderboard, name='leaderboard'),
     path('craiclounge/profile/', views.profile, name='profile'),
     path('qr_generator/', views.qr_generator, name='qr_generator'),
+    path('collectables/', views.collectables, name='collectables_url'),
     re_path(r'qr_scan(?P<api_package>.*)$', views.qr_scan, name='qr_scan_url'),
 ]
 if settings.DEBUG:
