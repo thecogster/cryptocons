@@ -1,0 +1,50 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Style the background image */
+  .background-image {
+    background-image: url("../images/craiclounge.jpeg");
+    background-size: 100% auto;
+    background-position: center center;
+    height: 100vh;
+  }
+  
+  .links-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .links-container a:first-child {
+    margin-right: 7cm;
+
+    margin-bottom: 1em;
+  }
+  
+  .links-container a:nth-child(2) {
+    margin-top: 180px;
+  }
+  
+  .links-container a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    border: 2px solid white;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .links-container a:hover {
+    background-color: white;
+    color: black;
+  }
