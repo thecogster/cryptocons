@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'cryptocons.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '34.147.136.146'
+        'NAME': 'cryptochauns-prod'),
+        'USER': 'cian',
+        'PASSWORD': 'Ins@neinthemembrane96',
+        'PORT': '3306',
     }
 }
 
@@ -128,11 +132,11 @@ USE_TZ = True
 
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'cryptocons/static/')
 ]
 
 TEMPLATE_DIRS = ['os.path.join(BASE_DIR, "templates"),']
@@ -143,6 +147,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = '/craiclounge/profile/'
 LOGOUT_REDIRECT_URL = '/'
+# STATIC_ROOT = os.path.join(BASE_DIR, '/static')
 STATIC_ROOT = '/static'
 
 ## BASE_DIR is file with manage.py
