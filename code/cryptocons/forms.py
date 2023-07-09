@@ -3,19 +3,26 @@ from pyexpat import model
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
-from .models import Cards
 from django import forms
 from django.forms import ModelForm, CharField, TextInput
+import random
+from django.db import models
+import random
+from django.db import models
+from cryptocons.models import CardsModel
+
+def generate_random_number():
+    return random.randint(1000000, 9999999)
 
 class CardsForm(forms.ModelForm):
-    leprechaun_number = forms.CharField( widget=TextInput(attrs={'type':'number'}))
-    tier = forms.CharField( widget=TextInput(attrs={'type':'number'}))
-    position = forms.CharField( widget=TextInput(attrs={'type':'number'}))
-    quantity = forms.CharField( widget=TextInput(attrs={'type':'number'}))
+    leprechaun_number = forms.CharField(widget=forms.TextInput(attrs={'type': 'number'}))
+    tier = forms.CharField(widget=forms.TextInput(attrs={'type': 'number'}))
+    position = forms.CharField(widget=forms.TextInput(attrs={'type': 'number'}))
+    quantity = forms.CharField(widget=forms.TextInput(attrs={'type': 'number'}))
 
     class Meta:
-        model = Cards 
-        fields = ['leprechaun_number', 'tier', 'position']
+        model = CardsModel
+        fields = ['leprechaun_number', 'tier', 'position', 'quantity']
 
 
 class UserRegisterForm(UserCreationForm):

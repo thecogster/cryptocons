@@ -1,57 +1,118 @@
-{% extends 'cryptocons/base.html'%}
-{% load crispy_forms_tags%}
+{% extends 'cryptocons/base.html' %}
+{% load crispy_forms_tags %}
 
-{%block content%}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('../../static/images/cryptochauns_logo.jpeg');
+        background-repeat: repeat;
+    }
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>User Profile Page</title>
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-		}
-		h1 {
-			font-size: 36px;
-			margin-top: 50px;
-			margin-bottom: 20px;
-		}
-		img {
-			max-width: 200px;
-			border-radius: 50%;
-			margin-bottom: 20px;
-		}
-		p {
-			font-size: 18px;
-			line-height: 1.5;
-			margin-bottom: 10px;
-		}
-	</style>
-</head>
-<body>
-    <img src="https://via.placeholder.com/200x200" alt="Profile Picture">
-    <h1>{{ profile_info.username }}</h1>
-    <p><strong>Email:</strong> {{ profile_info.email }}</p>
-    <p><strong>Account Created:</strong> {{ profile_info.date_joined }}</p>
-    <p><strong>Last Login:</strong> {{ profile_info.last_login }}</p>
+    .cont_div {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 100vh;
+    }
 
+    .prof_div {
+        color: white;
+        background-color: rgba(0, 0, 0, 0.4);
+        opacity: 1;
+        width: 30%;
+        text-align: center;
+        margin-top: -1vh;
+    }
 
-	{% if cards %}
-  <h2>Cards ({{ profile_info.card_count }})</h2>
-  <ul>
-    {% for card in cards %}
-      <li>
-        <img src="{{ card.image_location.url }}" alt="{{ card.card_name }}">
-        <p>{{ card.card_name }}</p>
-      </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>No cards found.</p>
-{% endif %}
+    h1 {
+        font-size: 40px;
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+
+	h2 {
+		font-size: 20px;
+	}
+
+    .mtt {
+        margin-top: 50px;
+    }
+
+    .mt {
+        margin-top: 40px;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+
+    .card-list {
+        display: flex;
+        justify-content: center;
+        vertical-align: center;
+        list-style: none;
+        padding: 0;
+    }
+
+    .card-list li {
+        margin-right: 10px;
+    }
+
+    .card-list li img {
+        display: block;
+        margin: 0 auto;
+        max-width: 200px;
+        border: solid white 2px;
+    }
+
+    .leaderboard_link {
+        color: white;
+		margin:15px
+    }
+
+    .butt {
+        border: solid white 2px;
+        width:max-content;
+        margin-top: 20px;
+    }
+
+    /* Added CSS to center the .butt div */
+    .prof_div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
+<div class="cont_div">
+    <div class="prof_div">
+        <h1>{{ profile_info.username }}</h1>
+        <p><strong>Email:</strong> {{ profile_info.email }}</p>
+        <p><strong>Account Created:</strong> {{ profile_info.date_joined }}</p>
+		<div class="butt">
+            <a class="leaderboard_link" href="{% url 'leaderboard' %}">Leaderboard</a>
+        </div>
+		<div class="mt">
+            <p><strong>Your Cryptochauns Collection</strong></p>
+        </div>
+        {% if cards %}
+            <h2>Total Number of Cards Collected ({{ profile_info.card_count }})</h2>
+            <div class="mtt">
+                <ul class="card-list">
+                    {% for card in cards %}
+                        <li>
+                            <img src="{{ card.image.url }}" alt="None">
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <div class="mt">
+                <p>No cards found.</p>
+            </div>
+        {% endif %}
+    </div>
 </div>
-
-
-<a class="ml-2" href="{% url 'leaderboard' %}"> Leaderboard</a>
-
-{%endblock%}
+{% endblock %}

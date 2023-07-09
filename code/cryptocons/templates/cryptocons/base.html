@@ -8,9 +8,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('../../static/images/cryptochauns_logo.jpeg');
+        background-repeat: repeat;
+    }
     /* Custom styles for the navbar */
     .navbar {
       background-color: rgba(55, 63, 56, 0); /* Set the background color with an alpha value for opacity */
+      background-color: rgba(0, 0, 0, 0.4);
+		  opacity: 1;
     }
   
     .navbar-brand img {
@@ -29,7 +36,7 @@
     .navbar .btn:hover {
       border-bottom: 3px; /* Change the background color on hover */
     }
-  
+    
     .navbar .navbar-nav {
       margin-left: auto; /* Push the navbar-nav to the right */
     }
@@ -54,6 +61,8 @@
         margin-left: 10px;
       }
     }
+    
+
   </style>
   
 </head>
@@ -81,7 +90,7 @@
             <a class="nav-link btn" href="{% url 'logout_url' %}">Logout</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link btn" href="#">My Account</a>
+            <a class="nav-link btn" href="{% url 'profile' %}">My Account</a>
           </li>
         </ul>
       {% endif %}
@@ -92,4 +101,7 @@
   {% endblock %}
 
   <!-- Include the necessary Bootstrap and jQuery scripts -->
-  <script src="https://
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>

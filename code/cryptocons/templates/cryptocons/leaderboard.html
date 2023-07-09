@@ -1,28 +1,88 @@
-{% extends 'cryptocons/base.html'%}
-{% load crispy_forms_tags%}
+{% extends 'cryptocons/base.html' %}
+{% load crispy_forms_tags %}
 
-{%block content%}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('../../static/images/cryptochauns_logo.jpeg');
+        background-repeat: repeat;
+    }
+
+    h1 {
+        color: white;
+    }
+
+    table {
+        color: white;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid white;
+    }
+
+    th {
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .card-list li img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100px;
+        border: solid white 2px;
+    }
+
+    .card-list {
+        display: flex;
+        justify-content: center;
+        vertical-align: center;
+        list-style: none;
+        padding: 0;
+    }
+
+    .card-list li {
+        margin-right: 10px;
+    }
+</style>
+
 <h1>Leaderboard</h1>
 <table>
     <thead>
         <tr>
             <th>Rank</th>
             <th>Username</th>
-            <th>Date Joined</th>
-            <th>Amount of cards</th>
-
+            <th>Collection</th>
         </tr>
     </thead>
     <tbody>
-        {% for user in users %}
+        {% for row in leaderboard %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.date_joined }}</td>
-                <td>{{ user.username|length }}</td>
+                <td>{{ row.user.username }}</td>
+                <td>
+                    {% if row.cards %}
+                        <div class="mtt">
+                            <ul class="card-list">
+                                {% for card in row.cards %}
+                                    <li>
+                                        <img src="{{ card.image.url }}" alt="None">
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% else %}
+                        <div class="mt">
+                            <p>No cards found.</p>
+                        </div>
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
 
-{%endblock%}
+{% endblock %}

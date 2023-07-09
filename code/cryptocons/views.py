@@ -11,9 +11,9 @@ import qrcode
 import os
 import mimetypes
 import shutil
-from .models import Cards
 import datetime
-from cryptocons.models import Cards
+from cryptocons.models import CardsModel
+from django.db.models import Count
 
 def home(request):
 
@@ -54,7 +54,7 @@ def qr_scan(request, api_package):
     
 	qr_package = api_packageparts = api_package.split('_')
 	
-	Cards.objects.filter(id=qr_package[3]).update(owner_id=user_id)
+	CardsModel.objects.filter(validation_code=qr_package[3]).update(owner_id=user_id)
 
 	os.mkdir(f"cryptocons/{qr_package[3]}")
 
@@ -66,9 +66,12 @@ def qr_generator(request):
 
     if request.method == 'POST':
         quantity = request.POST.get('quantity')
-        for i in range(1, int(quantity)):
+        for i in range(1, int(quantity)+1):
             form = CardsForm(request.POST)
             form.save()
+
+        last_x = CardsModel.objects.order_by('-id')[:len(range(1, int(quantity)+1))][::-1]
+        validation_codes = [entry.validation_code for entry in last_x]
 
         # Get the form inputs from the POST request
         leprechaun_number = request.POST.get('leprechaun_number')
@@ -84,13 +87,13 @@ def qr_generator(request):
         else:
             print(f"Directory '{save_path}' already exists.")
         
-        num_of_cards = Cards.objects.all().count()
+        num_of_cards = CardsModel.objects.all().count()
 
-        for i in range(num_of_cards+1, num_of_cards+int(quantity)):
+        for code in validation_codes:
             url = "http://127.0.0.1:8000/qr_scan/" 
 
             # Combine the URL and unique ID
-            data = url + str(leprechaun_number) + "_" + str(tier_id) + "_" + str(position) + "_" + str(i)
+            data = url + str(leprechaun_number) + "_" + str(tier_id) + "_" + str(position) + "_" + str(code)
 
             # Generate the QR code
             qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
@@ -101,7 +104,7 @@ def qr_generator(request):
             qr_image = qr.make_image(fill_color="black", back_color="white")
 
             # Save the QR code image with the unique ID as the filename
-            qr_image.save(f"{save_path}/L{leprechaun_number}_T{tier_id}_P{position}_{i}.png")
+            qr_image.save(f"{save_path}/L{leprechaun_number}_T{tier_id}_P{position}_{code}.png")
 
         shutil.make_archive(f'{save_path}' + '/output', 'zip', save_path)
         zip_file = open(f'{save_path}' + '/output.zip', 'rb')
@@ -111,18 +114,32 @@ def qr_generator(request):
 
 # @login_required(login_url='login_url')
 def leaderboard(request):
-    # Retrieve all users and sort by date joined
-    all_users = User.objects.order_by('date_joined')
+
+    top_users = CardsModel.objects.all().values('owner_id').annotate(total=Count('owner_id')).order_by('total')[:10][::-1]
+
+    top_user_cards = []
+    top_users_list = []
+
+    for user in top_users:
+        if user['total'] > 0:
+            top_user_cards.append(CardsModel.objects.filter(owner=user['owner_id']))
+        try:
+            top_users_list.append(User.objects.get(id=user['owner_id']))
+        except User.DoesNotExist:
+            top_users_list.append(None)
+
+
+    lst = [{'user': t[0], 'cards': t[1]} for t in zip(top_users_list, top_user_cards)]
 
 	## Its a dictionary passed as users to html 
-    return render(request, 'cryptocons/leaderboard.html', {'users': all_users})
+    return render(request, 'cryptocons/leaderboard.html', {'leaderboard': lst })
 
 
 @login_required(login_url='login_url')
 def profile(request):
 
 	current_user = request.user
-	cards = Cards.objects.filter(owner=current_user)
+	cards = CardsModel.objects.filter(owner=current_user)
 	card_count = cards.count()
     # Retrieve the current user's profile information
 	profile_info = {
