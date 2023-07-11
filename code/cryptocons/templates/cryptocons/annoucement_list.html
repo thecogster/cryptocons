@@ -1,0 +1,73 @@
+{% extends "cryptocons/base.html"%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<head>
+    <title>Announcements</title>
+    <style>
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        body {
+            background-image: url('/static/images/cryptochauns_logo.jpeg');
+            background-repeat: repeat;
+        }
+
+        h1, h2, p, li {
+            color: white;
+        }
+
+        /* Additional Styles */
+        ul.announcement-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        ul.announcement-list li {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 80%;
+            transition: background-color 0.5s ease;
+        }
+
+        ul.announcement-list li:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        ul.announcement-list li h2 {
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: spin 5s linear infinite;
+        }
+
+        ul.announcement-list li p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<ul class="announcement-list">
+    {% for announcement in announcements %}
+    <li>
+        <h2>{{ announcement.title }}</h2>
+        <p>{{ announcement.body }}</p>
+    </li>
+    {% empty %}
+    <li>No announcements yet.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

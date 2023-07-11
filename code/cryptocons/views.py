@@ -14,6 +14,8 @@ import shutil
 import datetime
 from cryptocons.models import CardsModel
 from django.db.models import Count
+from cryptocons.models import Announcement
+from .forms import AnnouncementForm 
 
 def home(request):
 
@@ -30,6 +32,21 @@ def collectables(request):
 
 	return render(request, 'cryptocons/collectables.html')
 
+@login_required(login_url='login_url')
+def create_announcement(request):
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('announcement_list')
+    else:
+        form = AnnouncementForm()
+    
+    return render(request, 'cryptocons/announcement_form.html', {'form': form})
+
+def announcement_list(request):
+    announcements = Announcement.objects.all()
+    return render(request, 'cryptocons/annoucement_list.html', {'announcements': announcements})
 
 def register(request):
 
