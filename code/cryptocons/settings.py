@@ -84,7 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '34.147.136.146'
-        'NAME': 'cryptochauns-prod'),
+        'NAME': 'cryptochauns-prod',
         'USER': 'cian',
         'PASSWORD': 'Ins@neinthemembrane96',
         'PORT': '3306',
@@ -144,11 +144,11 @@ TEMPLATE_DIRS = ['os.path.join(BASE_DIR, "templates"),']
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # AUTH_USER_MODEL = "accounts.CustomUser"  # new
-
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/craiclounge/profile/'
 LOGOUT_REDIRECT_URL = '/'
-# STATIC_ROOT = os.path.join(BASE_DIR, '/static')
-STATIC_ROOT = '/static'
+STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+#STATIC_ROOT = '/static'
 
 ## BASE_DIR is file with manage.py
 ## Assigns variable media root to our image folder

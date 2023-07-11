@@ -14,6 +14,8 @@ import shutil
 import datetime
 from cryptocons.models import CardsModel
 from django.db.models import Count
+from django.contrib.auth.decorators import user_passes_test
+
 
 def home(request):
 
@@ -60,7 +62,7 @@ def qr_scan(request, api_package):
 
 	return render(request, 'cryptocons/qr_scan.html')
 
-@login_required(login_url='login_url')
+@user_passes_test(lambda u: u.is_superuser)
 def qr_generator(request):
     template = 'cryptocons/qr_generator.html'
 
