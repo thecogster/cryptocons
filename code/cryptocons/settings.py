@@ -80,14 +80,21 @@ WSGI_APPLICATION = 'cryptocons.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'HOST': '127.0.0.1',
+#         'NAME': 'cryptochauns_prod',
+#         'USER': 'cian',
+#         'PASSWORD': os.getenv('DB_PASSWORD'),
+#         'PORT': '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': '34.147.136.146'
-        'NAME': 'cryptochauns-prod',
-        'USER': 'cian',
-        'PASSWORD': 'Ins@neinthemembrane96',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR + '/'+ 'db.sqlite3',
     }
 }
 

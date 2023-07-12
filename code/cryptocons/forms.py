@@ -10,6 +10,7 @@ from django.db import models
 import random
 from django.db import models
 from cryptocons.models import CardsModel
+from .models import Announcement
 
 def generate_random_number():
     return random.randint(1000000, 9999999)
@@ -40,5 +41,11 @@ class UserChangeFormCustom(UserChangeForm):
 		fields = ['username', 'email']
 
 
+from .models import Announcement
+
+class AnnouncementForm(forms.ModelForm):
+    class Meta:
+        model = Announcement
+        fields = ['title', 'body']
 
 

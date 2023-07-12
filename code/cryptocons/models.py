@@ -37,3 +37,11 @@ class CardsModel(models.Model):
                 dirty_fields.append(field.attname)
         return dirty_fields
       
+class Announcement(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=200)
+    body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

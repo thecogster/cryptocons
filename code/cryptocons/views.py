@@ -15,7 +15,8 @@ import datetime
 from cryptocons.models import CardsModel
 from django.db.models import Count
 from django.contrib.auth.decorators import user_passes_test
-
+from cryptocons.models import Announcement
+from .forms import AnnouncementForm 
 
 def home(request):
 
@@ -32,6 +33,21 @@ def collectables(request):
 
 	return render(request, 'cryptocons/collectables.html')
 
+@login_required(login_url='login_url')
+def create_announcement(request):
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('announcement_list')
+    else:
+        form = AnnouncementForm()
+    
+    return render(request, 'cryptocons/announcement_form.html', {'form': form})
+
+def announcement_list(request):
+    announcements = Announcement.objects.all()
+    return render(request, 'cryptocons/annoucement_list.html', {'announcements': announcements})
 
 def register(request):
 
@@ -51,16 +67,14 @@ def register(request):
 
 @login_required(login_url='login_url')
 def qr_scan(request, api_package):
-
-	user_id = request.user.id
+    user_id = request.user.id
+    qr_package = api_package.split('_')
     
-	qr_package = api_packageparts = api_package.split('_')
-	
-	CardsModel.objects.filter(validation_code=qr_package[3]).update(owner_id=user_id)
-
-	os.mkdir(f"cryptocons/{qr_package[3]}")
-
-	return render(request, 'cryptocons/qr_scan.html')
+    if CardsModel.objects.filter(validation_code=qr_package[3]).count() > 0:
+        if CardsModel.objects.filter(validation_code=qr_package[3]).values('owner_id')[0]['owner_id'] == None:
+            CardsModel.objects.filter(validation_code=qr_package[3]).update(owner_id=user_id)
+    
+    return redirect('profile')
 
 @user_passes_test(lambda u: u.is_superuser)
 def qr_generator(request):
@@ -152,6 +166,5 @@ def profile(request):
 	'card_count': card_count
 	}
 	context = {'profile_info':profile_info,'cards':cards}
-	
 
 	return render(request, 'cryptocons/profile.html', context)

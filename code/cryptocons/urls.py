@@ -36,6 +36,8 @@ urlpatterns = [
     path('qr_generator/', views.qr_generator, name='qr_generator'),
     path('collectables/', views.collectables, name='collectables_url'),
     re_path(r'qr_scan(?P<api_package>.*)$', views.qr_scan, name='qr_scan_url'),
+    path('announcement_list/create/', views.create_announcement, name='create_announcement'),
+    path('announcement_list/', views.announcement_list, name='announcement_list'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
